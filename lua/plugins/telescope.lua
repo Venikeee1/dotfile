@@ -61,8 +61,14 @@ return {
 					"Open prev search",
 				},
 				j = {
-					function(args)
-						builtin.grep_string(args)
+					function()
+						builtin.grep_string()
+					end,
+					"Search string",
+				},
+				["jj"] = {
+					function()
+						builtin.grep_string({ search = "" })
 					end,
 					"Search string",
 				},
