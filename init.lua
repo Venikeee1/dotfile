@@ -14,6 +14,10 @@ au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=2
 augroup END
 ]])
 
+-- spell check
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+
 -- remove tilda sign
 vim.opt.fillchars:append({ eob = " " })
 
