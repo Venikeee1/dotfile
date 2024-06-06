@@ -105,7 +105,7 @@ return {
 					end,
 					"Git status",
 				},
-				b = {
+				["bb"] = {
 					function(args)
 						builtin.git_branches(args)
 					end,

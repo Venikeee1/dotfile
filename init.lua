@@ -23,8 +23,8 @@ vim.opt.fillchars:append({ eob = " " })
 
 vim.diagnostic.config({ severity_sort = true })
 -- Undercurl for diagnostics
-vim.cmd([[let &t_Ce = "\e[4:0m"]])
-vim.cmd([[let &t_Cs = "\e[4:3m"]])
+-- vim.cmd([[let &t_Ce = "\e[4:0m"]])
+-- vim.cmd([[let &t_Cs = "\e[4:3m"]])
 
 vim.keymap.set({ "n", "i" }, "<C-s>", function()
 	vim.cmd(":w")
