@@ -45,6 +45,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {})
 -- map :W to :w
 vim.cmd([[command! -nargs=0 W w]])
 
+-- paste from "" buffer
+vim.keymap.set("n", "<leader>p", '"0p', {})
+
 -- Diagnostic
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })

@@ -3,7 +3,9 @@ return {
 	config = function()
 		local notify = require("notify")
 
-		notify.setup({})
+		notify.setup({
+			max_width = 70,
+		})
 		vim.notify = require("notify")
 	end,
 }
