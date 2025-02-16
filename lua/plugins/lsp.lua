@@ -39,7 +39,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "html", "phpactor" },
+				ensure_installed = { "lua_ls", "ts_ls", "html", "phpactor" },
 			})
 		end,
 	},
@@ -52,7 +52,7 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.phpactor.setup({
@@ -62,11 +62,6 @@ return {
 			-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 			--   update_in_insert = true,
 			-- })
-
-			-- vim.diagnostic.config {
-			--   virtual_text = false,
-			-- }
-
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.type_definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, {})

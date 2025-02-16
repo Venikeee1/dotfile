@@ -10,6 +10,7 @@ return {
 		local builtins = null_ls.builtins
 
 		null_ls.setup({
+			timeout_ms = 5000,
 			sources = {
 				require("none-ls.code_actions.eslint_d"),
 				require("none-ls.diagnostics.eslint_d"),
@@ -17,7 +18,7 @@ return {
 				builtins.formatting.stylua,
 				builtins.formatting.prettier,
 				-- null_ls.builtins.completion.spell,
-				null_ls.builtins.diagnostics.spell,
+				-- null_ls.builtins.diagnostics.spell,
 			},
 			virtual_text = false,
 			-- you can reuse a shared lspconfig on_attach callback here

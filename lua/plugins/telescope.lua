@@ -12,6 +12,9 @@ return {
 		local wk = require("which-key")
 
 		telescope.setup({
+			defaults = {
+				path_display = { "smart" },
+			},
 			pickers = {
 				buffers = {
 					ignore_current_buffer = true,

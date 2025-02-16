@@ -6,7 +6,8 @@ vim.cmd("set cursorline")
 vim.cmd("set signcolumn=yes:1")
 vim.cmd("set termguicolors")
 
--- highlight yank
+vim.g.mapleader = " "
+
 vim.cmd([[
 augroup highlight_yank
 autocmd!
@@ -30,6 +31,7 @@ vim.keymap.set({ "n", "i" }, "<C-s>", function()
 	vim.cmd(":w")
 end, {})
 
+-- buffer navigation
 vim.keymap.set({ "n", "v" }, "b[", function()
 	vim.cmd(":bn")
 end, {})
@@ -44,6 +46,15 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {})
 
 -- map :W to :w
 vim.cmd([[command! -nargs=0 W w]])
+vim.cmd([[
+	inoreabbrev cosnole console
+	inoreabbrev seperate separate
+	inoreabbrev cosnt const
+	inoreabbrev lable label
+	inoreabbrev rbm # TODO: remove before merging
+	inoreabbrev cbm # TODO: change before merging
+	inoreabbrev ubm # TODO: uncomment before merging
+]])
 
 -- paste from "" buffer
 vim.keymap.set("n", "<leader>p", '"0p', {})
@@ -53,8 +64,6 @@ vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticS
 vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
-
-vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
