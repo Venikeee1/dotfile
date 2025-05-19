@@ -47,22 +47,31 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
+			--
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
+			lspconfig.lua_ls.setup({})
+
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.phpactor.setup({
-				capabilities = capabilities,
+
+			lspconfig.typos_lsp.setup({
+				init_options = {
+					-- How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
+					-- Defaults to error.
+					diagnosticSeverity = "Warning",
+				},
 			})
+			-- lspconfig.phpactor.setup({
+			-- 	capabilities = capabilities,
+			-- })
 
 			-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 			--   update_in_insert = true,
 			-- })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, {})
 			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.type_definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})

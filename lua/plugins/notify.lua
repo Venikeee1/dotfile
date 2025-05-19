@@ -6,6 +6,6 @@ return {
 		notify.setup({
 			max_width = 70,
 		})
-		vim.notify = require("notify")
+		-- vim.notify = require("notify")
 	end,
 }

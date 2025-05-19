@@ -10,13 +10,13 @@ return {
 		local builtins = null_ls.builtins
 
 		null_ls.setup({
-			timeout_ms = 5000,
+			timeout_ms = 3000,
 			sources = {
 				require("none-ls.code_actions.eslint_d"),
 				require("none-ls.diagnostics.eslint_d"),
-
 				builtins.formatting.stylua,
 				builtins.formatting.prettier,
+
 				-- null_ls.builtins.completion.spell,
 				-- null_ls.builtins.diagnostics.spell,
 			},
@@ -31,6 +31,7 @@ return {
 						callback = function()
 							-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
 							-- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+							--  vim.lsp.buf.formatting_sync()
 							vim.lsp.buf.format({
 								async = false,
 								filter = function(client)

@@ -18,9 +18,10 @@ return {
 			pickers = {
 				buffers = {
 					ignore_current_buffer = true,
+					previewer = false,
 					sort_mru = true,
 					sort_lastused = true,
-					theme = "dropdown",
+					theme = "cursor",
 				},
 			},
 			extensions = {
@@ -30,148 +31,165 @@ return {
 			},
 		})
 
-		wk.register({
-			f = {
-				name = "file", -- optional group name
-				f = {
-					function(args)
-						builtin.find_files(args)
-					end,
-					"Find files",
-				},
-				g = {
-					function(args)
-						builtin.live_grep(args)
-					end,
-					"Live grep",
-				},
-				t = {
-					function(args)
-						builtin.tags(args)
-					end,
-					"Tags",
-				},
-				b = {
-					function(args)
-						builtin.buffers(args)
-					end,
-					"Show buffers",
-				},
-				s = {
-					function()
-						builtin.resume()
-					end,
-					"Open prev search",
-				},
-				j = {
-					function()
-						builtin.grep_string()
-					end,
-					"Search string",
-				},
-				["jj"] = {
-					function()
-						builtin.grep_string({ search = "" })
-					end,
-					"Search string",
-				},
-				i = {
-					function(args)
-						builtin.current_buffer_fuzzy_find(args)
-					end,
-					"Search in current file",
-				},
+		wk.add({
+			{
+				"<leader>ff",
+				function(args)
+					builtin.find_files(args)
+				end,
+				desc = "Find files",
 			},
-			["rr"] = {
+			{
+				"<leader>fg",
+				function()
+					builtin.live_grep({ additional_args = { "--fixed-strings" } })
+				end,
+				desc = "Live grep",
+			},
+			{
+				"<leader>fj",
+				function(args)
+					builtin.live_grep(args)
+				end,
+				desc = "Live grep with regex",
+			},
+			{
+				"<leader>ft",
+				function(args)
+					builtin.tags(args)
+				end,
+				desc = "Tags",
+			},
+			{
+				"<leader>fb",
+				function(args)
+					builtin.buffers(args)
+				end,
+				desc = "Show buffers",
+			},
+			{
+				"<leader>fs",
+				function()
+					builtin.resume()
+				end,
+				desc = "Open prev search",
+			},
+			{
+				"<leader>fj",
+				function()
+					builtin.grep_string()
+				end,
+				desc = "Grep strings",
+			},
+			{
+				"<leader>fjj",
+				function()
+					builtin.grep_string({ search = "" })
+				end,
+				desc = "Global Grep strings",
+			},
+			{
+				"<leader>fi",
+				function(args)
+					builtin.current_buffer_fuzzy_find(args)
+				end,
+				desc = "Search in current file",
+			},
+			{
+				"<leader>rr",
 				function(args)
 					builtin.registers(args)
 				end,
-				"Registers",
+				desc = "Registers",
 			},
-			["frf"] = {
+			{
+				"<leader>fr",
 				function(args)
 					telescope.extensions.recent_files.pick(args)
 				end,
-				"Recent files",
+				desc = "Recent files",
 			},
-			["fr"] = {
+			-- {
+			-- 	"<leader>fr",
+			-- 	function(args)
+			-- 		builtin.oldfiles(args)
+			-- 	end,
+			-- 	desc = "Old files",
+			-- },
+			{
+				"<leader>gs",
 				function(args)
-					builtin.oldfiles(args)
+					builtin.git_status(args)
 				end,
-				"Old files",
+				desc = "Git status",
 			},
-			g = {
-				name = "Git",
-				s = {
-					function(args)
-						builtin.git_status(args)
-					end,
-					"Git status",
-				},
-				["bb"] = {
-					function(args)
-						builtin.git_branches(args)
-					end,
-					"Git branches",
-				},
+			{
+				"<leader>gbb",
+				function(args)
+					builtin.git_branches(args)
+				end,
+				desc = "Git branches",
 			},
-			d = {
-				name = "Diagnostic",
-				n = {
-					function(args)
-						vim.diagnostic.goto_next(args)
-					end,
-					"Next diagnostic",
-				},
-				p = {
-					function(args)
-						vim.diagnostic.goto_prev(args)
-					end,
-					"Previous diagnostic",
-				},
-				f = {
-					function()
-						vim.diagnostic.open_float({ scope = "b" })
-					end,
-					"Open float diagnostic",
-				},
-				d = {
-					function()
-						vim.diagnostic.open_float({})
-					end,
-					"Open diagnostic for line",
-				},
-				a = {
-					function(args)
-						builtin.diagnostics(args)
-					end,
-					"show diannostics in projesct",
-				},
-				q = {
-					function(args)
-						builtin.quickfix(args)
-					end,
-					"Set qflist",
-				},
+			{
+				"<leader>dn",
+				function(args)
+					vim.diagnostic.goto_next(args)
+				end,
+				desc = "Next diagnostic",
 			},
-		}, { prefix = "<leader>" })
+			{
+				"<leader>dp",
+				function(args)
+					vim.diagnostic.goto_prev(args)
+				end,
+				desc = "Previous diagnostic",
+			},
+			{
+				"<leader>df",
+				function()
+					vim.diagnostic.open_float({ scope = "b", border = "rounded" })
+				end,
+				desc = "Open float diagnostic",
+			},
+			{
+				"<leader>dd",
+				function()
+					vim.diagnostic.open_float({
+						border = "rounded",
+					})
+				end,
+				desc = "Open diagnostic for line",
+			},
+			{
+				"<leader>da",
+				function(args)
+					builtin.diagnostics(args)
+				end,
+				desc = "show diannostics in projesct",
+			},
+			{
+				"<leader>dq",
+				function(args)
+					builtin.quickfix(args)
+				end,
+				desc = "Set qflist",
+			},
+		})
 
-		wk.register({
-			["gr"] = {
-				name = "file",
+		wk.add({
+			{
+				"gr",
 				function(args)
 					builtin.lsp_references(args)
 				end,
-				"LSP References",
+				desc = "LSP References",
 			},
-			z = {
-				name = "Spell",
-				["="] = {
-					function(args)
-						builtin.spell_suggest(args)
-					end,
-					"Spell suggest",
-				},
+			{
+				"z=",
+				function(args)
+					builtin.spell_suggest(args)
+				end,
+				desc = "Spell suggest",
 			},
 		})
 	end,

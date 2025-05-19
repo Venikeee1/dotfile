@@ -1,16 +1,15 @@
 vim.cmd("set number relativenumber")
 vim.cmd("set scrolloff=5")
 vim.cmd("set clipboard=unnamedplus")
+
 vim.cmd("set autoindent noexpandtab tabstop=2 shiftwidth=2")
 vim.cmd("set cursorline")
 vim.cmd("set signcolumn=yes:1")
 vim.cmd("set termguicolors")
 
 vim.g.mapleader = " "
-
 vim.cmd([[
-augroup highlight_yank
-autocmd!
+augroup highlight_yank autocmd!
 au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=200})
 augroup END
 ]])
@@ -46,18 +45,34 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {})
 
 -- map :W to :w
 vim.cmd([[command! -nargs=0 W w]])
+
+-- code spell checkers
 vim.cmd([[
 	inoreabbrev cosnole console
 	inoreabbrev seperate separate
 	inoreabbrev cosnt const
 	inoreabbrev lable label
+	inoreabbrev esle else
+
 	inoreabbrev rbm # TODO: remove before merging
 	inoreabbrev cbm # TODO: change before merging
 	inoreabbrev ubm # TODO: uncomment before merging
+
+	inoreabbrev tse$ // @ts-expect-error
+	inoreabbrev tsi$ // @ts-ignore
 ]])
 
 -- paste from "" buffer
 vim.keymap.set("n", "<leader>p", '"0p', {})
+-- copy relative path
+-- copy relative path
+vim.keymap.set("n", "<leader>cf", ':let @+ = expand("%")<CR>', {})
+-- copy absolute file path
+vim.keymap.set("n", "<leader>ca", ':let @+ = expand("%:p")<CR>', {})
+-- copy file name
+vim.keymap.set("n", "<leader>cn", ':let @+ = expand("%:t")<CR>', {})
+-- escape from insert mode
+vim.keymap.set("i", "jk", "<ESC>", { noremap = true })
 
 -- Diagnostic
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
@@ -81,5 +96,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+require("test")
 
 vim.cmd.colorscheme("solarized-osaka")

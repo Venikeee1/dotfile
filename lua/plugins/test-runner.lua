@@ -1,17 +1,15 @@
 return {
-  "vim-test/vim-test",
-  config = function()
-    local wk = require "which-key"
-    vim.cmd "let test#strategy = 'neovim'"
+	"vim-test/vim-test",
+	config = function()
+		local wk = require("which-key")
+		vim.cmd("let test#strategy = 'neovim'")
 
-    wk.register({
-      ["tt"] = { ":TestNearest<CR>", "Test nearest block" },
-      ["ts"] = { ":TestSuite<CR>", "Runs the whole test suite " },
-      ["tl"] = { ":TestLast<CR>", "Run last test" },
-      ["tf"] = { ":TestFile<CR>", "Run  in file" },
-      ["tr"] = { ":TestVisit<CR>", "Visits the test file from which you last run your tests" },
-    }, { prefix = "<leader>" })
-  end,
+		wk.add({
+			{ "<leader>tt", ":TestNearest<CR>", desc = "Test nearest block" },
+			{ "<leader>ts", ":TestSuite<CR>", desc = "Runs the whole test suite " },
+			{ "<leader>tl", ":TestLast<CR>", desc = "Run last test" },
+			{ "<leader>tf", ":TestFile<CR>", desc = "Run  in file" },
+			{ "<leader>tr", ":TestVisit<CR>", desc = "Visits the test file from which you last run your tests" },
+		})
+	end,
 }
-
--- <cmd>botright vs<cr><cmd>
